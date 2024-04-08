@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import Login from './login/pages/Login';
+import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
+import PrivateRoutes from './action/PrivateRoutes';
+import {toast,ToastContainer} from 'react-toastify';
+
+import Dashboard from './dashboard/pages/Dashboard';
+import Signup from './signup/pages/Signup';
+import UserRubric from './dashboard/pages/UserRubric';
+import MainInterface from './interface/pages/MainInterface';
+import AboutUs from './interface/pages/AboutUs';
+import ContactUs from './interface/pages/ContactUs';
+
+const App = () => {
+  return (<Router>
+    <Routes>
+      
+      <Route path="/login" exact element={<Login />}/>
+
+      <Route path="/signup" element = {<Signup/>}/>
+
+      <Route path="/" element = {<MainInterface/>}/>
+      <Route path="/about" element = {<AboutUs/>}/>
+      <Route path="/contact" element = {<ContactUs/>}/>
+
+
+
+      <Route element={<PrivateRoutes/>}>
+        <Route path="/dashboard" exact element = {<Dashboard/>}/>
+        <Route path="/rubrics" exact element = {<UserRubric/>}/>
+      </Route>
+
+    </Routes>
+
+  </Router>
   );
-}
+
+};
 
 export default App;
